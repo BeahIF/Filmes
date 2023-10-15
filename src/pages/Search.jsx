@@ -10,15 +10,17 @@ const apiKey = env.API_KEY
 const Search = () =>{
     const [searchParams] = useSearchParams()
     const [movies, setMovies] = useState([])
-    const query=searchParams.length("q");
+    const query=searchParams.get("q");
     console.log(query)
     const getSearchMovies= async (url)=>{
         const res = await fetch(url)
+        console.log(res)
         const data = await res.json()
+        console.log(data)
         setMovies(data.results)
     }
     useEffect(()=>{
-        const searchWithQueryUrl = `${searchUrl}?${apiKey}&query=${query}`
+        const searchWithQueryUrl =  `${searchUrl}?${apiKey}&query=${query}`;
         getSearchMovies(searchWithQueryUrl)
     },[query])
     return (
